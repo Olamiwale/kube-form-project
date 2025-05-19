@@ -36,5 +36,6 @@ jobs:
 
     - name: Deploy to AKS
       run: |
-        kubectl set image deployment/form-backend backend=depaulcluster/form-backend:latest
+        kubectl apply -f backend/k8s/backend-deployments.yaml
+        kubectl apply -f backend/k8s/backend-service.yaml
 
