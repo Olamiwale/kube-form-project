@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: form-backend-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: form-backend
+  template:
+    metadata:
+      labels:   
+        app: form-backend
+    spec:
+      containers:
+      - name: form-backend
+        image: briitz/form-backend:latest
+        ports:
+        - containerPort: 5000
