@@ -36,6 +36,6 @@ jobs:
 
     - name: Deploy to AKS
       run: |
-        kubectl apply -f backend/k8s/backend-deployments.yaml
+        kubectl apply -f backend/k8s/backend-deployment.yaml
         kubectl apply -f backend/k8s/backend-service.yaml
 
