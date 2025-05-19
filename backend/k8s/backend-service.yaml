@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: form-backend-service
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: form-backend
   ports:
