@@ -27,7 +27,14 @@ jobs:
       run: |
         docker push depaulacr.azurecr.io/form-backend:latest
 
+    - name: Set AKS context
+      uses: azure/aks-set-context@v3
+      with:
+       creds: ${{ secrets.AZURE_CREDENTIALS }}
+       cluster-name: depaulcluster
+       resource-group: depaul
+
     - name: Deploy to AKS
       run: |
-        kubectl config use-context depaulcluster
         kubectl set image deployment/form-backend backend=depaulcluster/form-backend:latest -n backend-namespace
+
