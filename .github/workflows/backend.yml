@@ -20,14 +20,14 @@ jobs:
 
     - name: Build Docker image
       run: |
-        az acr login --name ${{ secrets.ACR_NAME }}
-        docker build -t ${{ secrets.ACR_NAME }}/form-backend:latest ./backend
+        az acr login --name depaulacr.azurecr.io
+        docker build -t depaulacr.azurecr.io/form-backend:latest ./backend
 
     - name: Push Docker image to ACR
       run: |
-        docker push ${{ secrets.ACR_NAME }}/form-backend:latest
+        docker push depaulacr.azurecr.io/form-backend:latest
 
     - name: Deploy to AKS
       run: |
-        kubectl config use-context ${{ secrets.AKS_CLUSTER }}
-        kubectl set image deployment/form-backend backend=${{ secrets.ACR_NAME }}/form-backend:latest -n backend-namespace
+        kubectl config use-context depaulcluster
+        kubectl set image deployment/form-backend backend=depaulcluster/form-backend:latest -n backend-namespace
