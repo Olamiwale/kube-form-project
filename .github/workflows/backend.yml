@@ -20,8 +20,8 @@ jobs:
 
     - name: Build Docker image
       run: |
-        az acr login --name depaulacr.azurecr.io
-        docker build -t depaulacr.azurecr.io/form-backend:latest ./backend
+        az acr login --name ${{ secrets.ACR_NAME }}
+        docker build -t ${{ secrets.ACR_NAME }}/form-backend:latest ./backend
 
     - name: Push Docker image to ACR
       run: |
@@ -31,8 +31,8 @@ jobs:
       uses: azure/aks-set-context@v3
       with:
        creds: ${{ secrets.AZURE_CREDENTIALS }}
-       cluster-name: depaulcluster
-       resource-group: depaul
+       cluster-name: ${{ secrets.CLUSTER_NAME }}
+       resource-group: ${{ secrets.RESOURCE_GROUP }}
 
     - name: Deploy to AKS
       run: |
